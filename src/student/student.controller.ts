@@ -6,9 +6,17 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  @Post()
-  create(@Body() student: Partial<Student>) {
-    return this.studentService.createStudent(student);
+  
+  @Get()
+  findAll() {
+    return this.studentService.getAllStudents();
   }
+
+  
+  @Get(':id')
+  findOne(@Param('id') id: number) {
+    return this.studentService.getStudentById(id);
+  }
+
 
 }
