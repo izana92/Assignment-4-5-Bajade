@@ -6,7 +6,6 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.studentService.deleteStudent(id);
