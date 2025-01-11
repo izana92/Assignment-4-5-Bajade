@@ -10,19 +10,13 @@ export class StudentService {
     private studentRepository: Repository<Student>,
   ) {}
 
-  // UPDATE (PUT)
-  async updateStudent(id: number, updatedData: Partial<Student>): Promise<Student> {
-    const student = await this.getStudentById(id);
-    Object.assign(student, updatedData);
-    return this.studentRepository.save(student);
+
+  // DELETE
+  async deleteStudent(id: number): Promise<{ message: string }> {
+    const result = await this.studentRepository.delete(id);
+    if (result.affected === 0) {
+      throw new NotFoundException('Student not found');
+    }
+    return { message: `Student with ID ${id} has been deleted` };
   }
-
-  // PARTIAL UPDATE (PATCH)
-  async partialUpdateStudent(id: number, partialData: Partial<Student>): Promise<Student> {
-    const student = await this.getStudentById(id);
-    Object.assign(student, partialData);
-    return this.studentRepository.save(student);
-  }
-
-
 }
