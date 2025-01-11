@@ -6,17 +6,9 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-
-  @Put(':id')
-  update(@Param('id') id: number, @Body() student: Partial<Student>) {
-    return this.studentService.updateStudent(id, student);
+  // DELETE
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.studentService.deleteStudent(id);
   }
-
-  
-  @Patch(':id')
-  partialUpdate(@Param('id') id: number, @Body() student: Partial<Student>) {
-    return this.studentService.partialUpdateStudent(id, student);
-  }
-
- 
 }
