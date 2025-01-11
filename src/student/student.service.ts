@@ -11,12 +11,19 @@ export class StudentService {
     private studentRepository: Repository<Student>,
   ) {}
 
-  // Create
-  async createStudent(student: Partial<Student>): Promise<Student> {
-    const newStudent = this.studentRepository.create(student);
-    return await this.studentRepository.save(newStudent);
+
+  // Read (GET ALL)
+  async getAllStudents(): Promise<Student[]> {
+    return await this.studentRepository.find();
   }
 
-  
+  // Read (GET ONE)
+  async getStudentById(id: number): Promise<Student> {
+    const student = await this.studentRepository.findOne({ where: { id } });
+    if (!student) {
+      throw new NotFoundException('Student not found');
+    }
+    return student;
+  }
 
 }
