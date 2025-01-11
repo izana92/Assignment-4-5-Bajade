@@ -7,18 +7,39 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
+  // CREATE
+  @Post()
+  create(@Body() student: Partial<Student>) {
+    return this.studentService.createStudent(student);
+  }
 
-  // Read (GET ALL)
+  // READ (GET ALL)
   @Get()
   findAll() {
     return this.studentService.getAllStudents();
   }
 
-  // Read (GET ONE)
+  // READ (GET ONE)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.studentService.getStudentById(id);
   }
 
- 
+  // UPDATE (PUT)
+  @Put(':id')
+  update(@Param('id') id: number, @Body() student: Partial<Student>) {
+    return this.studentService.updateStudent(id, student);
+  }
+
+  // PARTIAL UPDATE (PATCH)
+  @Patch(':id')
+  partialUpdate(@Param('id') id: number, @Body() student: Partial<Student>) {
+    return this.studentService.partialUpdateStudent(id, student);
+  }
+
+  // DELETE
+  @Delete(':id')
+  remove(@Param('id') id: number) {
+    return this.studentService.deleteStudent(id);
+  }
 }
