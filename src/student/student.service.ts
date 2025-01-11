@@ -10,11 +10,10 @@ export class StudentService {
     private studentRepository: Repository<Student>,
   ) {}
 
-  async deleteStudent(id: number): Promise<{ message: string }> {
-    const result = await this.studentRepository.delete(id);
-    if (result.affected === 0) {
-      throw new NotFoundException('Student not found');
-    }
-    return { message: `Student with ID ${id} has been deleted` };
+  //Create
+  async createStudent(student: Partial<Student>): Promise<Student> {
+    const newStudent = this.studentRepository.create(student);
+    return await this.studentRepository.save(newStudent);
   }
+
 }
