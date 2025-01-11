@@ -6,11 +6,6 @@ import { Student } from './student.entity';
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
 
-  // CREATE
-  @Post()
-  create(@Body() student: Partial<Student>) {
-    return this.studentService.createStudent(student);
-  }
 
   @Put(':id')
   update(@Param('id') id: number, @Body() student: Partial<Student>) {
